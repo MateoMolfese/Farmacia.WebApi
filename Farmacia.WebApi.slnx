@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="Farmacia.Abstactions/Farmacia.Abstactions.csproj" Id="111ffcb9-9c9c-4ca7-a11e-f5176b1a806f" />
+  <Project Path="Farmacia.Application/Farmacia.Application.csproj" Id="85fc3eb0-df4f-47cf-af81-9a1fd936bb01" />
+  <Project Path="Farmacia.DataAccess/Farmacia.DataAccess.csproj" Id="9d9cd692-00b2-4184-bcb8-c88445a38757" />
+  <Project Path="Farmacia.Entities/Farmacia.Entities.csproj" Id="a4dde93c-2123-42aa-a6f0-426d4d14ef1a" />
+  <Project Path="Farmacia.Enums/Farmacia.Enums.csproj" Id="dc08feb5-8cd1-466a-990c-62456e0b37ed" />
+  <Project Path="Farmacia.Repository/Farmacia.Repository.csproj" Id="be7b8376-eb7a-4a79-a42a-4370508a88c7" />
+  <Project Path="Farmacia.Services/Farmacia.Services.csproj" Id="990e9dae-31a1-4ee2-a2bc-abbba0bb45f7" />
+  <Project Path="Farmacia.WebApi/Farmacia.WebApi.csproj" />
+</Solution>
