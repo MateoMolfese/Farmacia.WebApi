@@ -1,6 +1,6 @@
 using AutoMapper;
 using Farmacia.Application;
-using Farmacia.Application.Dtos.Laboratorio;
+using Farmacia.Application.Dtos.Marca;
 using Farmacia.Entities;
 using Farmacia.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -9,19 +9,19 @@ namespace Farmacia.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LaboratoriosController : ControllerBase
+    public class MarcasController : ControllerBase
     {
-        private readonly ILogger<LaboratoriosController> _logger;
+        private readonly ILogger<MarcasController> _logger;
         private readonly IStringService _stringService;
-        private readonly IApplication<Laboratorio> _laboratorio;
+        private readonly IApplication<Marca> _marca;
         private readonly IMapper _mapper;
 
-        public LaboratoriosController(IApplication<Laboratorio> laboratorio
-            , ILogger<LaboratoriosController> logger
+        public MarcasController(IApplication<Marca> marca
+            , ILogger<MarcasController> logger
             , IStringService stringService
             , IMapper mapper)
         {
-            _laboratorio = laboratorio;
+            _marca = marca;
             _logger = logger;
             _stringService = stringService;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace Farmacia.WebApi.Controllers
         [Route("All")]
         public async Task<IActionResult> All()
         {
-            return Ok(_mapper.Map<IList<LaboratorioResponseDto>>(_laboratorio.GetAll()));
+            return Ok(_mapper.Map<IList<MarcaResponseDto>>(_marca.GetAll()));
         }
 
         [HttpGet]
@@ -41,38 +41,38 @@ namespace Farmacia.WebApi.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            Laboratorio laboratorio = _laboratorio.GetById(Id.Value);
-            if (laboratorio is null)
+            Marca marca = _marca.GetById(Id.Value);
+            if (marca is null)
                 return NotFound();
 
-            return Ok(_mapper.Map<LaboratorioResponseDto>(laboratorio));
+            return Ok(_mapper.Map<MarcaResponseDto>(marca));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear(LaboratorioRequestDto laboratorioRequestDto)
+        public async Task<IActionResult> Crear(MarcaRequestDto marcaRequestDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var laboratorio = _mapper.Map<Laboratorio>(laboratorioRequestDto);
-            _laboratorio.Save(laboratorio);
-            return Ok(laboratorio.Id);
+            var marca = _mapper.Map<Marca>(marcaRequestDto);
+            _marca.Save(marca);
+            return Ok(marca.Id);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Editar(int? Id, LaboratorioRequestDto laboratorioRequestDto)
+        public async Task<IActionResult> Editar(int? Id, MarcaRequestDto marcaRequestDto)
         {
             if (!Id.HasValue)
                 return BadRequest();
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            Laboratorio laboratorioBack = _laboratorio.GetById(Id.Value);
-            if (laboratorioBack is null)
+            Marca marcaBack = _marca.GetById(Id.Value);
+            if (marcaBack is null)
                 return NotFound();
 
-            _mapper.Map(laboratorioRequestDto, laboratorioBack);
-            _laboratorio.Save(laboratorioBack);
+            _mapper.Map(marcaRequestDto, marcaBack);
+            _marca.Save(marcaBack);
             return Ok();
         }
 
@@ -82,11 +82,11 @@ namespace Farmacia.WebApi.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            Laboratorio laboratorioBack = _laboratorio.GetById(Id.Value);
-            if (laboratorioBack is null)
+            Marca marcaBack = _marca.GetById(Id.Value);
+            if (marcaBack is null)
                 return NotFound();
 
-            _laboratorio.Delete(laboratorioBack.Id);
+            _marca.Delete(marcaBack.Id);
             return Ok();
         }
     }
