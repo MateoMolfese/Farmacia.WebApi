@@ -1,6 +1,6 @@
 using AutoMapper;
 using Farmacia.Application;
-using Farmacia.Application.Dtos.Laboratorio;
+using Farmacia.Application.Dtos.Medicamento;
 using Farmacia.Entities;
 using Farmacia.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -9,19 +9,19 @@ namespace Farmacia.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LaboratoriosController : ControllerBase
+    public class MedicamentosController : ControllerBase
     {
-        private readonly ILogger<LaboratoriosController> _logger;
+        private readonly ILogger<MedicamentosController> _logger;
         private readonly IStringService _stringService;
-        private readonly IApplication<Laboratorio> _laboratorio;
+        private readonly IApplication<Medicamento> _medicamento;
         private readonly IMapper _mapper;
 
-        public LaboratoriosController(IApplication<Laboratorio> laboratorio
-            , ILogger<LaboratoriosController> logger
+        public MedicamentosController(IApplication<Medicamento> medicamento
+            , ILogger<MedicamentosController> logger
             , IStringService stringService
             , IMapper mapper)
         {
-            _laboratorio = laboratorio;
+            _medicamento = medicamento;
             _logger = logger;
             _stringService = stringService;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace Farmacia.WebApi.Controllers
         [Route("All")]
         public async Task<IActionResult> All()
         {
-            return Ok(_mapper.Map<IList<LaboratorioResponseDto>>(_laboratorio.GetAll()));
+            return Ok(_mapper.Map<IList<MedicamentoResponseDto>>(_medicamento.GetAll()));
         }
 
         [HttpGet]
@@ -41,38 +41,38 @@ namespace Farmacia.WebApi.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            Laboratorio laboratorio = _laboratorio.GetById(Id.Value);
-            if (laboratorio is null)
+            Medicamento medicamento = _medicamento.GetById(Id.Value);
+            if (medicamento is null)
                 return NotFound();
 
-            return Ok(_mapper.Map<LaboratorioResponseDto>(laboratorio));
+            return Ok(_mapper.Map<MedicamentoResponseDto>(medicamento));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear(LaboratorioRequestDto laboratorioRequestDto)
+        public async Task<IActionResult> Crear(MedicamentoRequestDto medicamentoRequestDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var laboratorio = _mapper.Map<Laboratorio>(laboratorioRequestDto);
-            _laboratorio.Save(laboratorio);
-            return Ok(laboratorio.Id);
+            var medicamento = _mapper.Map<Medicamento>(medicamentoRequestDto);
+            _medicamento.Save(medicamento);
+            return Ok(medicamento.Id);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Editar(int? Id, LaboratorioRequestDto laboratorioRequestDto)
+        public async Task<IActionResult> Editar(int? Id, MedicamentoRequestDto medicamentoRequestDto)
         {
             if (!Id.HasValue)
                 return BadRequest();
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            Laboratorio laboratorioBack = _laboratorio.GetById(Id.Value);
-            if (laboratorioBack is null)
+            Medicamento medicamentoBack = _medicamento.GetById(Id.Value);
+            if (medicamentoBack is null)
                 return NotFound();
 
-            _mapper.Map(laboratorioRequestDto, laboratorioBack);
-            _laboratorio.Save(laboratorioBack);
+            _mapper.Map(medicamentoRequestDto, medicamentoBack);
+            _medicamento.Save(medicamentoBack);
             return Ok();
         }
 
@@ -82,11 +82,11 @@ namespace Farmacia.WebApi.Controllers
             if (!Id.HasValue)
                 return BadRequest();
 
-            Laboratorio laboratorioBack = _laboratorio.GetById(Id.Value);
-            if (laboratorioBack is null)
+            Medicamento medicamentoBack = _medicamento.GetById(Id.Value);
+            if (medicamentoBack is null)
                 return NotFound();
 
-            _laboratorio.Delete(laboratorioBack.Id);
+            _medicamento.Delete(medicamentoBack.Id);
             return Ok();
         }
     }
