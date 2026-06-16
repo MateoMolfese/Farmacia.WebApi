@@ -18,12 +18,10 @@ builder.Services.AddDbContext<DbDataAccess>(options =>
     options.UseLazyLoadingProxies();
 });
 
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
-builder.Services.AddScoped(typeof(IStringService), typeof(StringService));
+builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly)); builder.Services.AddScoped(typeof(IStringService), typeof(StringService));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IApplication<>), typeof(Application<>));
-builder.Services.AddScoped(typeof(IDbContext<>), typeof(DbContext<>));
-
+builder.Services.AddScoped(typeof(IDbContext<>), typeof(Farmacia.DataAccess.DbContext<>));
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

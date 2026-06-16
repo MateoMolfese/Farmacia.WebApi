@@ -9,8 +9,12 @@ namespace Farmacia.WebApi.Mapping
         public MedicamentoMappingProfile()
         {
             CreateMap<Medicamento, MedicamentoResponseDto>()
-                .ForMember(dest => dest.NombreMarca, ori => ori.MapFrom(src => src.Marca != null ? src.Marca.Nombre : null));
+                .ForMember(
+                    dest => dest.NombreMarca,
+                    opt => opt.MapFrom(src => src.Marca.Nombre));
+
             CreateMap<MedicamentoRequestDto, Medicamento>();
         }
     }
 }
+

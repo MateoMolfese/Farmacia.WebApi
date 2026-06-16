@@ -15,7 +15,7 @@ namespace Farmacia.DataAccess
 
         public virtual DbSet<MedicamentosPorTipos> MedicamentosPorTipos { get; set; }
         public DbDataAccess(DbContextOptions<DbDataAccess> options) : base(options) { }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.LogTo(Console.WriteLine).EnableDetailedErrors();
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
     }
 }
