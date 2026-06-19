@@ -1,9 +1,7 @@
-﻿using Farmacia.Abstactions;
-using System;
+using Farmacia.Abstactions;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Farmacia.Entities
 {
@@ -13,6 +11,8 @@ namespace Farmacia.Entities
         {
             MedicamentosPorMarcas = new HashSet<MedicamentosPorMarcas>();
             MedicamentosPorTipos = new HashSet<MedicamentosPorTipos>();
+            ProveedorMedicamentos = new HashSet<ProveedorMedicamento>();
+            DetallesVenta = new HashSet<DetalleVenta>();
         }
         public int Id { get; set; }
         [StringLength(10)]
@@ -21,5 +21,7 @@ namespace Farmacia.Entities
         public virtual Marca Marca { get; set; }
         public virtual ICollection<MedicamentosPorMarcas> MedicamentosPorMarcas { get; set; }
         public virtual ICollection<MedicamentosPorTipos> MedicamentosPorTipos { get; set; }
+        public virtual ICollection<ProveedorMedicamento> ProveedorMedicamentos { get; set; }
+        public virtual ICollection<DetalleVenta> DetallesVenta { get; set; }
     }
 }
