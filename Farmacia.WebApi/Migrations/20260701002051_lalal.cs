@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -6,11 +6,134 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Farmacia.WebApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class lalal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_DetallesVenta_Medicamento_IdMedicamento",
+                table: "DetallesVenta");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_ProveedorMedicamentos_Medicamento_IdMedicamento",
+                table: "ProveedorMedicamentos");
+
+            migrationBuilder.DropUniqueConstraint(
+                name: "AK_Medicamento_TempId",
+                table: "Medicamento");
+
+            migrationBuilder.DropUniqueConstraint(
+                name: "AK_Medicamento_TempId1",
+                table: "Medicamento");
+
+            migrationBuilder.RenameTable(
+                name: "Medicamento",
+                newName: "Medicamentos");
+
+            migrationBuilder.RenameColumn(
+                name: "TempId1",
+                table: "Medicamentos",
+                newName: "MarcaId");
+
+            migrationBuilder.RenameColumn(
+                name: "TempId",
+                table: "Medicamentos",
+                newName: "IdMarca");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Telefono",
+                table: "Sucursales",
+                type: "nvarchar(20)",
+                maxLength: 20,
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(20)",
+                oldMaxLength: 20,
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Direccion",
+                table: "Sucursales",
+                type: "nvarchar(200)",
+                maxLength: 200,
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(200)",
+                oldMaxLength: 200,
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Telefono",
+                table: "Proveedores",
+                type: "nvarchar(20)",
+                maxLength: 20,
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(20)",
+                oldMaxLength: 20,
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Email",
+                table: "Proveedores",
+                type: "nvarchar(150)",
+                maxLength: 150,
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(150)",
+                oldMaxLength: 150,
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Email",
+                table: "Clientes",
+                type: "nvarchar(100)",
+                maxLength: 100,
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100,
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Dni",
+                table: "Clientes",
+                type: "nvarchar(15)",
+                maxLength: 15,
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(15)",
+                oldMaxLength: 15,
+                oldNullable: true);
+
+            migrationBuilder.AddColumn<int>(
+                name: "Id",
+                table: "Medicamentos",
+                type: "int",
+                nullable: false,
+                defaultValue: 0)
+                .Annotation("SqlServer:Identity", "1, 1");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Nombre",
+                table: "Medicamentos",
+                type: "nvarchar(10)",
+                maxLength: 10,
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_Medicamentos",
+                table: "Medicamentos",
+                column: "Id");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -107,7 +230,7 @@ namespace Farmacia.WebApi.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,7 +251,7 @@ namespace Farmacia.WebApi.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,7 +271,7 @@ namespace Farmacia.WebApi.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,13 +289,13 @@ namespace Farmacia.WebApi.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,28 +315,7 @@ namespace Farmacia.WebApi.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Medicamentos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    IdMarca = table.Column<int>(type: "int", nullable: false),
-                    MarcaId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Medicamentos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Medicamentos_Marcas_MarcaId",
-                        column: x => x.MarcaId,
-                        principalTable: "Marcas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -233,13 +335,13 @@ namespace Farmacia.WebApi.Migrations
                         column: x => x.IdLaboratorio,
                         principalTable: "Laboratorios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MedicamentosPorMarcas_Medicamentos_IdMedicamento",
                         column: x => x.IdMedicamento,
                         principalTable: "Medicamentos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -259,14 +361,19 @@ namespace Farmacia.WebApi.Migrations
                         column: x => x.IdMedicamento,
                         principalTable: "Medicamentos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MedicamentosPorTipos_TiposDeMedicamentos_IdTiposDeMedicamento",
                         column: x => x.IdTiposDeMedicamento,
                         principalTable: "TiposDeMedicamentos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Medicamentos_MarcaId",
+                table: "Medicamentos",
+                column: "MarcaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -308,11 +415,6 @@ namespace Farmacia.WebApi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Medicamentos_MarcaId",
-                table: "Medicamentos",
-                column: "MarcaId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MedicamentosPorMarcas_IdLaboratorio",
                 table: "MedicamentosPorMarcas",
                 column: "IdLaboratorio");
@@ -331,11 +433,47 @@ namespace Farmacia.WebApi.Migrations
                 name: "IX_MedicamentosPorTipos_IdTiposDeMedicamento",
                 table: "MedicamentosPorTipos",
                 column: "IdTiposDeMedicamento");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_DetallesVenta_Medicamentos_IdMedicamento",
+                table: "DetallesVenta",
+                column: "IdMedicamento",
+                principalTable: "Medicamentos",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Medicamentos_Marcas_MarcaId",
+                table: "Medicamentos",
+                column: "MarcaId",
+                principalTable: "Marcas",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProveedorMedicamentos_Medicamentos_IdMedicamento",
+                table: "ProveedorMedicamentos",
+                column: "IdMedicamento",
+                principalTable: "Medicamentos",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_DetallesVenta_Medicamentos_IdMedicamento",
+                table: "DetallesVenta");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Medicamentos_Marcas_MarcaId",
+                table: "Medicamentos");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_ProveedorMedicamentos_Medicamentos_IdMedicamento",
+                table: "ProveedorMedicamentos");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -350,6 +488,9 @@ namespace Farmacia.WebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Marcas");
 
             migrationBuilder.DropTable(
                 name: "MedicamentosPorMarcas");
@@ -367,13 +508,123 @@ namespace Farmacia.WebApi.Migrations
                 name: "Laboratorios");
 
             migrationBuilder.DropTable(
-                name: "Medicamentos");
-
-            migrationBuilder.DropTable(
                 name: "TiposDeMedicamentos");
 
-            migrationBuilder.DropTable(
-                name: "Marcas");
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_Medicamentos",
+                table: "Medicamentos");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Medicamentos_MarcaId",
+                table: "Medicamentos");
+
+            migrationBuilder.DropColumn(
+                name: "Id",
+                table: "Medicamentos");
+
+            migrationBuilder.DropColumn(
+                name: "Nombre",
+                table: "Medicamentos");
+
+            migrationBuilder.RenameTable(
+                name: "Medicamentos",
+                newName: "Medicamento");
+
+            migrationBuilder.RenameColumn(
+                name: "MarcaId",
+                table: "Medicamento",
+                newName: "TempId1");
+
+            migrationBuilder.RenameColumn(
+                name: "IdMarca",
+                table: "Medicamento",
+                newName: "TempId");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Telefono",
+                table: "Sucursales",
+                type: "nvarchar(20)",
+                maxLength: 20,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(20)",
+                oldMaxLength: 20);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Direccion",
+                table: "Sucursales",
+                type: "nvarchar(200)",
+                maxLength: 200,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(200)",
+                oldMaxLength: 200);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Telefono",
+                table: "Proveedores",
+                type: "nvarchar(20)",
+                maxLength: 20,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(20)",
+                oldMaxLength: 20);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Email",
+                table: "Proveedores",
+                type: "nvarchar(150)",
+                maxLength: 150,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(150)",
+                oldMaxLength: 150);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Email",
+                table: "Clientes",
+                type: "nvarchar(100)",
+                maxLength: 100,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Dni",
+                table: "Clientes",
+                type: "nvarchar(15)",
+                maxLength: 15,
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(15)",
+                oldMaxLength: 15);
+
+            migrationBuilder.AddUniqueConstraint(
+                name: "AK_Medicamento_TempId",
+                table: "Medicamento",
+                column: "TempId");
+
+            migrationBuilder.AddUniqueConstraint(
+                name: "AK_Medicamento_TempId1",
+                table: "Medicamento",
+                column: "TempId1");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_DetallesVenta_Medicamento_IdMedicamento",
+                table: "DetallesVenta",
+                column: "IdMedicamento",
+                principalTable: "Medicamento",
+                principalColumn: "TempId1",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ProveedorMedicamentos_Medicamento_IdMedicamento",
+                table: "ProveedorMedicamentos",
+                column: "IdMedicamento",
+                principalTable: "Medicamento",
+                principalColumn: "TempId",
+                onDelete: ReferentialAction.Cascade);
         }
     }
 }
