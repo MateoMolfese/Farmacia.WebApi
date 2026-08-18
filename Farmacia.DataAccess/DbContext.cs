@@ -1,8 +1,7 @@
 ﻿using Farmacia.Abstactions;
+using Farmacia.DataAccess;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Farmacia.DataAccess
 {
@@ -15,6 +14,7 @@ namespace Farmacia.DataAccess
             _ctx = ctx;
             _Items = _ctx.Set<T>();
         }
+
         public void Delete(int id)
         {
             var entity = _Items.FirstOrDefault(i => i.Id == id);
@@ -40,8 +40,8 @@ namespace Farmacia.DataAccess
             }
             else
             {
-                var entityDb = GetById(entity.Id);
-                _ctx.Entry(entityDb).State = EntityState.Modified;
+                //var entityDb = GetById(entity.Id);
+                //_ctx.Entry(entityDb).State = EntityState.Modified;
                 _Items.Update(entity);
             }
             _ctx.SaveChanges();

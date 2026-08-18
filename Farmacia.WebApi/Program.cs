@@ -1,13 +1,17 @@
+using Farmacia.DataAccess;
 using Farmacia.Abstactions;
 using Farmacia.Application;
-using Farmacia.DataAccess;
 using Farmacia.Repository;
 using Farmacia.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+
 builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -18,12 +22,15 @@ builder.Services.AddDbContext<DbDataAccess>(options =>
     options.UseLazyLoadingProxies();
 });
 
-builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly)); builder.Services.AddScoped(typeof(IStringService), typeof(StringService));
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped(typeof(IStringService), typeof(StringService));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IApplication<>), typeof(Application<>));
-builder.Services.AddScoped(typeof(IDbContext<>), typeof(Farmacia.DataAccess.DbContext<>));
+builder.Services.AddScoped(typeof(IDbContext<>), typeof(DbContext<>));
+
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -31,6 +38,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();
