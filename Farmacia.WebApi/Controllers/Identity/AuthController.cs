@@ -34,7 +34,16 @@ namespace Farmacia.WebApi.Controllers.Identity
         {
             if (ModelState.IsValid)
             {
-                var existeUsuario = await _userManager.FindByEmailAsync(user.Email);
+                var existeUsuario = new User();
+                try
+                {
+                    existeUsuario = await _userManager.FindByEmailAsync(user.Email);
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
                 if (existeUsuario != null)
                 {
                     return BadRequest("Existe un usuario registrado con el mal " + user.Email + ".");

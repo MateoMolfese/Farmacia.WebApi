@@ -16,7 +16,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
-
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 // JWT Configuration
 var jwtSecret = builder.Configuration.GetSection("JwtConfig:Secret").Value;
 if (string.IsNullOrEmpty(jwtSecret))
