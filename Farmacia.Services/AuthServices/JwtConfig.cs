@@ -1,0 +1,7 @@
+﻿namespace Farmacia.Services.AuthServices
+{
+    public class JwtConfig
+    {
+        public string Secret { get; set; }
+    }
+}

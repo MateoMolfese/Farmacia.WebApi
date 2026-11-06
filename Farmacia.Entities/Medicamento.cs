@@ -17,6 +17,7 @@ namespace Farmacia.Entities
         public int Id { get; set; }
         [StringLength(10)]
         public string Nombre { get; set; }
+        [ForeignKey(nameof(Marca))]
         public int IdMarca { get; set; }
         public virtual Marca Marca { get; set; }
         public virtual ICollection<MedicamentosPorMarcas> MedicamentosPorMarcas { get; set; }
