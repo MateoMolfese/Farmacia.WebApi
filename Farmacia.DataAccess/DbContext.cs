@@ -1,5 +1,6 @@
-﻿using Farmacia.Abstactions;
+using Farmacia.Abstactions;
 using Farmacia.DataAccess;
+using Farmacia.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
@@ -15,6 +16,16 @@ namespace Farmacia.DataAccess
             _Items = _ctx.Set<T>();
         }
 
+        // Consulta base. Para Medicamento se incluye la Marca para que NombreMarca llegue a la API
+        private IQueryable<T> Consulta()
+        {
+            if (typeof(T) == typeof(Medicamento))
+            {
+                return (IQueryable<T>)(object)_ctx.Medicamentos.Include(m => m.Marca);
+            }
+            return _Items;
+        }
+
         public void Delete(int id)
         {
             var entity = _Items.FirstOrDefault(i => i.Id == id);
@@ -24,12 +35,12 @@ namespace Farmacia.DataAccess
 
         public IList<T> GetAll()
         {
-            return _Items.ToList();
+            return Consulta().ToList();
         }
 
         public T GetById(int id)
         {
-            return _Items.FirstOrDefault(i => i.Id == id);
+            return Consulta().FirstOrDefault(i => i.Id == id);
         }
 
         public T Save(T entity)

@@ -130,9 +130,6 @@ namespace Farmacia.DataAccess.Migrations
                     b.Property<int>("IdMarca")
                         .HasColumnType("int");
 
-                    b.Property<int>("MarcaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -140,7 +137,7 @@ namespace Farmacia.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MarcaId");
+                    b.HasIndex("IdMarca");
 
                     b.ToTable("Medicamentos");
                 });
@@ -549,7 +546,7 @@ namespace Farmacia.DataAccess.Migrations
                 {
                     b.HasOne("Farmacia.Entities.Marca", "Marca")
                         .WithMany("Medicamentos")
-                        .HasForeignKey("MarcaId")
+                        .HasForeignKey("IdMarca")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
