@@ -528,13 +528,13 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.Medicamento", "Medicamento")
                         .WithMany("DetallesVenta")
                         .HasForeignKey("IdMedicamento")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Farmacia.Entities.Venta", "Venta")
                         .WithMany("DetallesVenta")
                         .HasForeignKey("IdVenta")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Medicamento");
@@ -547,7 +547,7 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.Marca", "Marca")
                         .WithMany("Medicamentos")
                         .HasForeignKey("IdMarca")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Marca");
@@ -558,13 +558,13 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.Laboratorio", "Laboratorio")
                         .WithMany("MedicamentosPorMarcas")
                         .HasForeignKey("IdLaboratorio")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Farmacia.Entities.Medicamento", "Medicamento")
                         .WithMany("MedicamentosPorMarcas")
                         .HasForeignKey("IdMedicamento")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Laboratorio");
@@ -577,13 +577,13 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.Medicamento", "Medicamento")
                         .WithMany("MedicamentosPorTipos")
                         .HasForeignKey("IdMedicamento")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Farmacia.Entities.TiposDeMedicamento", "TiposDeMedicamento")
                         .WithMany("MedicamentosPorTipos")
                         .HasForeignKey("IdTiposDeMedicamento")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Medicamento");
@@ -596,7 +596,7 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.MicrosoftIdentity.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -605,7 +605,7 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.MicrosoftIdentity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -614,7 +614,7 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.MicrosoftIdentity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -623,13 +623,13 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.MicrosoftIdentity.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Farmacia.Entities.MicrosoftIdentity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -638,7 +638,7 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.MicrosoftIdentity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -647,13 +647,13 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.Medicamento", "Medicamento")
                         .WithMany("ProveedorMedicamentos")
                         .HasForeignKey("IdMedicamento")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Farmacia.Entities.Proveedor", "Proveedor")
                         .WithMany("ProveedorMedicamentos")
                         .HasForeignKey("IdProveedor")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Medicamento");
@@ -666,13 +666,13 @@ namespace Farmacia.DataAccess.Migrations
                     b.HasOne("Farmacia.Entities.Cliente", "Cliente")
                         .WithMany("Ventas")
                         .HasForeignKey("IdCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Farmacia.Entities.Sucursal", "Sucursal")
                         .WithMany("Ventas")
                         .HasForeignKey("IdSucursal")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Cliente");

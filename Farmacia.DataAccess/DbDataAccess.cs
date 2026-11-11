@@ -30,7 +30,10 @@ namespace Farmacia.DataAccess
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
-
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
             modelBuilder.Entity<DetalleVenta>()
                 .Property(d => d.PrecioUnitario)
                 .HasColumnType("decimal(18,2)");

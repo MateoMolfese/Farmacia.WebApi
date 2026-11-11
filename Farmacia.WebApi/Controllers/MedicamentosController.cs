@@ -72,6 +72,8 @@ namespace Farmacia.WebApi.Controllers
                 return NotFound();
 
             _mapper.Map(medicamentoRequestDto, medicamentoBack);
+            // Se quita la navegacion para que EF use el IdMarca nuevo y no la marca anterior
+            medicamentoBack.Marca = null;
             _medicamento.Save(medicamentoBack);
             return Ok();
         }
