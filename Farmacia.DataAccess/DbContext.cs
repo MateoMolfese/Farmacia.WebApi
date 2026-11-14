@@ -16,7 +16,6 @@ namespace Farmacia.DataAccess
             _Items = _ctx.Set<T>();
         }
 
-        // Consulta base. Para Medicamento se incluye la Marca para que NombreMarca llegue a la API
         private IQueryable<T> Consulta()
         {
             if (typeof(T) == typeof(Medicamento))
